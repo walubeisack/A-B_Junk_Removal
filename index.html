@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>A & B Junk Removal</title>
+    <meta name="description" content="Professional junk removal services for homes and businesses.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Internal Styles -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: black;
+            background-color: #FFA500; /* Vibrant orange */
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background: black;
+            color: white;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
+        nav {
+            background: black;
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #FFA500; /* Vibrant orange */
+        }
+
+        section {
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 900px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        section h1 {
+            font-size: 2rem;
+            color: black;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .services ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .services ul li {
+            margin: 10px 0;
+            font-size: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .popup h2 {
+            margin-top: 0;
+            color: black;
+        }
+
+        .popup .close {
+            background: black;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .popup .close:hover {
+            background: #FFA500; /* Vibrant orange */
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .button {
+            display: inline-block;
+            margin: 20px auto;
+            background: black;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background: #FFA500; /* Vibrant orange */
+        }
+
+        footer {
+            background: black;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: #FFA500; /* Vibrant orange */
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>A & B Junk Removal</h1>
+    <p>Your Trusted Junk Removal Experts</p>
+</header>
+
+<!-- Navigation -->
+<nav>
+    <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- About Section -->
+<section id="about">
+    <h1>About Us</h1>
+    <p>At A & B Junk Removal, we specialize in hassle-free junk removal services for homes and businesses. 
+       Our team is dedicated to providing quick, efficient, and eco-friendly solutions for all your disposal needs.</p>
+</section>
+
+<!-- Services Section -->
+<section id="services">
+    <h1>Our Services</h1>
+    <ul>
+        <li>Residential Junk Removal <button onclick="showPopup('residential')">Details</button></li>
+        <li>Commercial Junk Removal <button onclick="showPopup('commercial')">Details</button></li>
+        <li>Construction Debris Cleanup <button onclick="showPopup('construction')">Details</button></li>
+        <li>Appliance and Furniture Disposal <button onclick="showPopup('appliance')">Details</button></li>
+        <li>Eco-Friendly Recycling Solutions <button onclick="showPopup('eco')">Details</button></li>
+    </ul>
+    <a href="#contact" class="button">Get a Free Quote</a>
+</section>
+
+<div id="popup" class="popup">
+    <h2 id="popup-title"></h2>
+    <p id="popup-content"></p>
+    <button class="close" onclick="closePopup()">Close</button>
+</div>
+<div class="overlay" id="overlay" onclick="closePopup()"></div>
+
+<!-- Contact Section -->
+<section id="contact">
+    <h1>Contact Us</h1>
+    <p>We’re here to help! Reach out to us for a free quote or any inquiries.</p>
+    <p>Email: <a href="mailto:info@abjunkremoval.com">info@abjunkremoval.com</a></p>
+    <p>Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
+    <p>Address: 123 Junk Lane, Cleanup City, USA</p>
+</section>
+
+<!-- Footer -->
+<footer>
+    <p>&copy; 2024 A & B Junk Removal. All rights reserved.</p>
+    <p><a href="#about">About Us</a> | <a href="#services">Services</a> | <a href="#contact">Contact</a></p>
+</footer>
+
+<script>
+    const serviceDetails = {
+        residential: "We provide efficient removal of household junk, including old furniture, appliances, and general clutter.",
+        commercial: "Our commercial junk removal services cover offices, warehouses, and retail spaces.",
+        construction: "We handle construction debris cleanup, ensuring your site is clean and safe.",
+        appliance: "Disposal of old appliances and furniture with eco-friendly recycling options.",
+        eco: "Our eco-friendly solutions focus on recycling and minimizing landfill waste."
+    };
+
+    function showPopup(service) {
+        document.getElementById('popup-title').textContent = service.replace(/\b\w/g, c => c.toUpperCase());
+        document.getElementById('popup-content').textContent = serviceDetails[service];
+        document.getElementById('popup').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+    }
+
+    function closePopup() {
+        document.getElementById('popup').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none';
+    }
+</script>
+
+</body>
+</html>
