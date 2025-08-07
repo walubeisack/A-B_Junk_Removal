@@ -17,19 +17,16 @@
             color: black;
             background-color: #FFA500; /* Vibrant orange */
         }
-
         header {
             text-align: center;
             padding: 20px;
             background: black;
             color: white;
         }
-
         header h1 {
             margin: 0;
             font-size: 2.5rem;
         }
-
         nav {
             background: black;
             display: flex;
@@ -39,29 +36,24 @@
             top: 0;
             z-index: 1000;
         }
-
         nav ul {
             list-style: none;
             margin: 0;
             padding: 0;
             display: flex;
         }
-
         nav ul li {
             margin: 0 20px;
         }
-
         nav ul li a {
             text-decoration: none;
             color: white;
             font-size: 1.2rem;
             transition: color 0.3s;
         }
-
         nav ul li a:hover {
             color: #FFA500; /* Vibrant orange */
         }
-
         section {
             padding: 20px;
             margin: 20px auto;
@@ -70,45 +62,50 @@
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-
         section h1 {
             font-size: 2rem;
             color: black;
             font-weight: bold;
             text-align: center;
         }
-
-        .services ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .services ul li {
-            margin: 10px 0;
-            font-size: 1.2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
         .popup {
             display: none;
             position: fixed;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             background: white;
-            padding: 20px;
+            padding: 25px;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.3);
             z-index: 1000;
+            width: 80%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
         }
-
+        .popup-images {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .popup-images img {
+            width: 250px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 3px solid #ccc;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        .popup-images img:hover {
+            transform: scale(1.05);
+        }
         .popup h2 {
             margin-top: 0;
             color: black;
         }
-
         .popup .close {
             background: black;
             color: white;
@@ -117,22 +114,17 @@
             cursor: pointer;
             border-radius: 5px;
         }
-
         .popup .close:hover {
-            background: #FFA500; /* Vibrant orange */
+            background: #FFA500;
         }
-
         .overlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
             z-index: 999;
         }
-
         .button {
             display: inline-block;
             margin: 20px auto;
@@ -146,11 +138,9 @@
             text-align: center;
             text-decoration: none;
         }
-
         .button:hover {
-            background: #FFA500; /* Vibrant orange */
+            background: #FFA500;
         }
-
         footer {
             background: black;
             color: white;
@@ -158,26 +148,53 @@
             padding: 20px 0;
             margin-top: 40px;
         }
-
         footer a {
-            color: #FFA500; /* Vibrant orange */
+            color: #FFA500;
             text-decoration: none;
         }
-
         footer a:hover {
             text-decoration: underline;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.2);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .lightbox-close:hover {
+            color: #FFA500;
         }
     </style>
 </head>
 <body>
 <header>
-        <div style="text-align: center;">
-            <img src="images/Logo.png" alt="Logo" style="height: 150px; margin-bottom: 10px;">
-            <h1>A & B Junk Removal</h1>
-        </div>
-        <p>Your Trusted Junk Removal Experts</p>
+    <div style="text-align: center;">
+        <img src="images/Logo.png" alt="Logo" style="height: 150px; margin-bottom: 10px;">
+        <h1>A & B Junk Removal</h1>
+    </div>
+    <p>Your Trusted Junk Removal Experts</p>
 </header>
-    
 
 <!-- Navigation -->
 <nav>
@@ -208,12 +225,20 @@
     <a href="#contact" class="button">Get a Free Quote</a>
 </section>
 
+<!-- Popup -->
 <div id="popup" class="popup">
     <h2 id="popup-title"></h2>
     <p id="popup-content"></p>
+    <div id="popup-images" class="popup-images"></div>
     <button class="close" onclick="closePopup()">Close</button>
 </div>
 <div class="overlay" id="overlay" onclick="closePopup()"></div>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <img id="lightbox-img" src="" alt="">
+</div>
 
 <!-- Contact Section -->
 <section id="contact">
@@ -231,26 +256,56 @@
 </footer>
 
 <script>
-    const serviceDetails = {
-        residential: "We provide efficient removal of household junk, including old furniture, appliances, and general clutter.",
-        commercial: "Our commercial junk removal services cover offices, warehouses, and retail spaces.",
-        construction: "We handle construction debris cleanup, ensuring your site is clean and safe.",
-        appliance: "Disposal of old appliances and furniture with eco-friendly recycling options.",
-        eco: "Our eco-friendly solutions focus on recycling and minimizing landfill waste."
-    };
-
-    function showPopup(service) {
-        document.getElementById('popup-title').textContent = service.replace(/\b\w/g, c => c.toUpperCase());
-        document.getElementById('popup-content').textContent = serviceDetails[service];
-        document.getElementById('popup').style.display = 'block';
-        document.getElementById('overlay').style.display = 'block';
+const serviceDetails = {
+    residential: {
+        text: "We provide efficient removal of household junk, including old furniture, appliances, and general clutter.",
+        images: ["images/residential1.jpg", "images/residential2.jpg", "images/residential3.jpg"]
+    },
+    commercial: {
+        text: "Our commercial junk removal services cover offices, warehouses, and retail spaces.",
+        images: ["images/commercial1.jpg", "images/commercial2.jpg", "images/commercial3.jpg"]
+    },
+    construction: {
+        text: "We handle construction debris cleanup, ensuring your site is clean and safe.",
+        images: ["images/construction1.jpg", "images/construction2.jpg", "images/construction3.jpg"]
+    },
+    appliance: {
+        text: "Disposal of old appliances and furniture with eco-friendly recycling options.",
+        images: ["images/appliance1.jpg", "images/appliance2.jpg", "images/appliance3.jpg"]
+    },
+    eco: {
+        text: "Our eco-friendly solutions focus on recycling and minimizing landfill waste.",
+        images: ["images/eco1.jpg", "images/eco2.jpg", "images/eco3.jpg"]
     }
+};
 
-    function closePopup() {
-        document.getElementById('popup').style.display = 'none';
-        document.getElementById('overlay').style.display = 'none';
-    }
+function showPopup(service) {
+    const data = serviceDetails[service];
+    document.getElementById('popup-title').textContent = service.replace(/\b\w/g, c => c.toUpperCase());
+    document.getElementById('popup-content').textContent = data.text;
+
+    const imagesContainer = document.getElementById('popup-images');
+    imagesContainer.innerHTML = data.images.map(img => 
+        `<img src="${img}" alt="" onclick="openLightbox('${img}')">`
+    ).join("");
+
+    document.getElementById('popup').style.display = 'block';
+    document.getElementById('overlay').style.display = 'block';
+}
+
+function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+}
+
+function openLightbox(imgSrc) {
+    document.getElementById('lightbox-img').src = imgSrc;
+    document.getElementById('lightbox').style.display = 'flex';
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+}
 </script>
-
 </body>
 </html>
